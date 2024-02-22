@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 using namespace std;
 struct Node
 {
@@ -62,7 +63,7 @@ struct Node *sortNumbers(struct Node *head)
     ptr = head;
 
     while(ptr != NULL) {
-        if(ptr->value > ptr->next->value) {
+        if(fabs(ptr->value - ptr->next->value) < 0.001) {
             swapNode(ptr, ptr->next);
         }
         ptr = ptr->next;
