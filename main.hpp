@@ -63,8 +63,8 @@ struct Node *sortNumbers(struct Node *head)
     ptr = head;
 
     while(ptr != NULL) {
-        if(fabs(ptr->value - ptr->next->value) < 0.001) {
-            swapNode(ptr, ptr->next);
+        if(ptr->value > ptr->next->value) {
+            ptr = swapNode(ptr, ptr->next);
         }
         ptr = ptr->next;
     }
