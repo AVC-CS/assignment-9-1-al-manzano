@@ -81,5 +81,5 @@ struct Node *swapNode(struct Node *prev, struct Node *ptr)
     ptr->next = after->next;
     after->next = ptr;
 
-    return after;
+    return ptr;
 }
