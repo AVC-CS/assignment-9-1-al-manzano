@@ -16,9 +16,22 @@ struct Node *swapNode(struct Node *prev, struct Node *ptr);
 
 struct Node *makeNumbers(int N)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    struct Node *head, *tmp, *prev;
+    srand(time(NULL));
+
+    for (int i = 0; i < N; i++) {
+        tmp = (struct Node *)malloc(sizeof(struct Node));
+        tmp->value = rand() % 100;
+        tmp->next = NULL;
+        if (i == 0) {
+            head = tmp;
+        } else {
+            prev->next = tmp;
+        }
+        prev = tmp;
+    }
+
+    return head;
 }
 void printNumbers(struct Node *head)
 {
@@ -29,26 +42,45 @@ void printNumbers(struct Node *head)
         ptr = ptr->next;
     }
     cout << endl;
-    /*******************************
-     * Code your program here
-     *******************************/
 }
 int getLength(struct Node *head)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    struct Node *ptr = head;
+    int cnt;
+
+    cnt = 0;
+    while(ptr != NULL) {
+        cnt++;
+        ptr = ptr->next;
+    }
+
+    return cnt;
 }
 struct Node *sortNumbers(struct Node *head)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    struct Node *ptr;
+    ptr = head;
+
+    while(ptr != NULL) {
+        if(ptr->value > ptr->next->value) {
+            swapNode(ptr, ptr->next);
+        }
+        ptr = ptr->next;
+    }
+
+    return head;
 }
 
 struct Node *swapNode(struct Node *prev, struct Node *ptr)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    struct Node *pv, *pt, *after;
+    pv = prev;
+    pt = ptr;
+
+    after = pt->next;
+    pv->next = after;
+    pt->next = after->next;
+    after->next = pt;
+
+    return after;
 }
