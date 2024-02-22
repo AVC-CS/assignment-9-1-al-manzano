@@ -73,14 +73,12 @@ struct Node *sortNumbers(struct Node *head)
 
 struct Node *swapNode(struct Node *prev, struct Node *ptr)
 {
-    struct Node *pv, *pt, *after;
-    pv = prev;
-    pt = ptr;
+    struct Node *after;
 
-    after = pt->next;
-    pv->next = after;
-    pt->next = after->next;
-    after->next = pt;
+    after = ptr->next;
+    prev->next = after;
+    ptr->next = after->next;
+    after->next = ptr;
 
     return after;
 }
