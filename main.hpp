@@ -57,17 +57,28 @@ int getLength(struct Node *head)
 
     return cnt;
 }
+
 struct Node *sortNumbers(struct Node *head)
 {
-    struct Node *ptr;
-    ptr = head;
+    struct Node *ptr, *prev, *tmp;
+    bool swap;
 
-    while(ptr != NULL) {
-        if(ptr->value > ptr->next->value) {
-            ptr = swapNode(ptr, ptr->next);
+    do {
+        swap = false;
+        ptr = head;
+        prev = NULL;
+
+        while (ptr != NULL && ptr->next != NULL) {
+            if (ptr->value > ptr->next->value) {
+                tmp = swapNode(prev, ptr);
+                if (prev == NULL)
+                    head = tmp;
+                swap = true;
+            }
+            prev = ptr;
+            ptr = ptr->next;
         }
-        ptr = ptr->next;
-    }
+    } while (swap);
 
     return head;
 }
@@ -75,11 +86,13 @@ struct Node *sortNumbers(struct Node *head)
 struct Node *swapNode(struct Node *prev, struct Node *ptr)
 {
     struct Node *after;
-
     after = ptr->next;
-    prev->next = after;
+    
     ptr->next = after->next;
     after->next = ptr;
 
-    return ptr;
+    if (prev != NULL)
+        prev->next = after;
+
+    return after;
 }
